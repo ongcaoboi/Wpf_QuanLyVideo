@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Project_QuanLyVideoHocTap.UserControls.UC_ListVideos"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Project_QuanLyVideoHocTap.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <ListView x:Name="ListViewVideo" ItemsSource="{Binding Video}"
+              Background="#4E565A" SelectionChanged="ListViewVideo_SelectionChanged"
+              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+              ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <StackPanel Margin="10" Width="290" Height="300">
+                    <Border Width="290" Height="160" CornerRadius="2" Margin="2">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="1"/>
+                        </Border.Effect>
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding urlThumbails}"/>
+                        </Border.Background>
+                    </Border>
+                    <TextBlock Margin="5" Text="{Binding tenVd}" Foreground="White"
+                               FontSize="22" TextWrapping="Wrap" FontWeight="Bold"                                                 
+                               FontFamily="Franklin Gothic Medium"/>
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Lượt xem: " FontSize="17" Foreground="White"/>
+                        <TextBlock Margin="5 0" Text="{Binding luotXem}"
+                               TextWrapping="Wrap" FontSize="17" Foreground="White"/>
+                    </StackPanel>
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Ngày đăng: " FontSize="17" Foreground="White"/>
+                        <TextBlock Margin="5 0" Text="{Binding ngayDang}"
+                               TextWrapping="Wrap" FontSize="17" Foreground="White"/>
+                    </StackPanel>
+                </StackPanel>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel/>
+            </ItemsPanelTemplate>
+        </ListView.ItemsPanel>
+    </ListView>
+</UserControl>

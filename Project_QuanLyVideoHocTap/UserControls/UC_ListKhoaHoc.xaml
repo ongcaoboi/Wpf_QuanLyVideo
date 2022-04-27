@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="Project_QuanLyVideoHocTap.UserControls.UC_ListKhoaHoc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Project_QuanLyVideoHocTap.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid  x:Name="Grid_Kh_Videos">
+        <ListView x:Name="List_KhoaHoc" ItemsSource="{Binding KhoaHoc}"
+              Background="#4E565A" SelectionChanged="List_KhoaHoc_SelectionChanged"
+              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+              ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="10" Width="290" Height="150">
+                        <TextBlock Margin="5" Text="{Binding tenKh}" Foreground="White"
+                               FontSize="22" TextWrapping="Wrap" FontWeight="Bold"                                                 
+                               FontFamily="Franklin Gothic Medium"/>
+                        <StackPanel Margin="5" Orientation="Horizontal">
+                            <TextBlock Text="Ngày tạo: " FontSize="17" Foreground="White"/>
+                            <TextBlock Margin="5 0" Text="{Binding ngayTao}"
+                               TextWrapping="Wrap" FontSize="17" Foreground="White"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</UserControl>

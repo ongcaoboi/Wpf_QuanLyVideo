@@ -1,0 +1,179 @@
+﻿<Window x:Class="Project_QuanLyVideoHocTap.XemVideo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project_QuanLyVideoHocTap.Database"
+        mc:Ignorable="d"
+        ResizeMode="NoResize" MouseDown="Window_MouseDown"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" Height="600" Width="1080">
+    <Window.CommandBindings>
+        <CommandBinding Command="MediaCommands.Play" CanExecute="Play_CanExecute" Executed="Play_Executed" />
+        <CommandBinding Command="MediaCommands.Pause" CanExecute="Pause_CanExecute" Executed="Pause_Executed" />
+        <CommandBinding Command="MediaCommands.Stop" CanExecute="Stop_CanExecute" Executed="Stop_Executed" />
+    </Window.CommandBindings>
+    <Grid Background="#4E565A" HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" HorizontalAlignment="Stretch">
+            <TextBlock Text="Quản lý videos học tập" Foreground="#6FE69A" 
+                           FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"
+                           FontWeight="Bold" Margin="10 10 0 0"/>
+            <Button x:Name="btn_Thoat" Width="30" Height="30" Background="Transparent"
+                    VerticalAlignment="Top" BorderThickness="0" Click="btn_Thoat_Click"
+                    ToolTip="Thoát" HorizontalAlignment="Right" Style="{StaticResource btn_None}">
+                <Image Source="Images/Ic_Exit.png" Width="25" Height="25"
+                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1" Margin="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="800"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="2"  x:Name="Grid_Video" MouseWheel="Grid_MouseWheel">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="440"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <MediaElement Grid.Row="0" Margin="0 5 0 0" x:Name="mePlayer" LoadedBehavior="Manual" Source="{Binding urlVd}" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Top">
+                        <Button x:Name="btn_Play" Background="Transparent"
+                                VerticalAlignment="Center" BorderThickness="0" Margin="0 0 0 0" Command="MediaCommands.Play"
+                                ToolTip="Phát" HorizontalAlignment="Center" Style="{StaticResource btn_None}">
+                            <Image Source="Images/Ic_Play.png" Width="25" Height="25"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Button>
+                        <Button x:Name="btn_Pause" Command="MediaCommands.Pause" Background="Transparent"
+                                VerticalAlignment="Center" BorderThickness="0" Margin="0 0 0 0"
+                                ToolTip="Dừng" HorizontalAlignment="Center" Style="{StaticResource btn_None}">
+                            <Image Source="Images/Ic_Pause.png" Width="25" Height="25"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Button>
+                        <Button x:Name="btn_Stop" Command="MediaCommands.Stop" Background="Transparent"
+                                VerticalAlignment="Center" BorderThickness="0" Margin="0 0 0 0"
+                                ToolTip="Dừng" HorizontalAlignment="Center" Style="{StaticResource btn_None}">
+                            <Image Source="Images/Ic_Stop.png" Width="25" Height="25"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Button>
+                        <StatusBar Width="710" Margin="12 5 0 5" Background="Transparent" Foreground="White">
+                            <StatusBar.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                    </Grid>
+                                </ItemsPanelTemplate>
+                            </StatusBar.ItemsPanel>
+                            <StatusBarItem>
+                                <TextBlock Name="lblProgressStatus">00:00:00</TextBlock>
+                            </StatusBarItem>
+                            <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch">
+                                <Slider Name="sliProgress" Thumb.DragStarted="sliProgress_DragStarted"
+                                        Thumb.DragCompleted="sliProgress_DragCompleted" ValueChanged="sliProgress_ValueChanged" />
+                            </StatusBarItem>
+                            <StatusBarItem Grid.Column="2">
+                                <ProgressBar Name="pbVolume" Width="50" Height="12" Maximum="1"
+                                             ToolTip="Lăn chuột để tăng giảm âm lượng"
+                                             Value="{Binding ElementName=mePlayer, Path=Volume}" />
+                            </StatusBarItem>
+                        </StatusBar>
+                    </StackPanel>
+                    <TextBlock Grid.Row="2" Foreground="#6FE69A" Text="{Binding tenVd}" Margin="10 0 0 0"
+                               FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"
+                               FontWeight="Bold"/>
+                    <StackPanel Grid.Row="3" Orientation="Horizontal">
+                        <TextBlock Foreground="#ffff" Text="Ngày đăng: " Margin="10 0 5 0"
+                                   FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBlock Foreground="#6FE69A" Width="200" Text="{Binding ngayDang}"
+                                   FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBlock Foreground="#ffff" Text="Lượt xem: " Margin="10 0 5 0"
+                                   FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBlock Foreground="#6FE69A" Text="{Binding luotXem}"
+                                   FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="12 0 0 0">
+                    <TextBlock Foreground="#ffff" Text="Khoá học "
+                                   FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="txb_TenKhCuaVd" Width="500" Foreground="#6FE69A"
+                               FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Button x:Name="btn_ThemKhoaHoc" Background="Transparent" Click="btn_ThemKhoaHoc_Click"
+                                VerticalAlignment="Center" BorderThickness="0" Margin="10 0 0 0"
+                                ToolTip="Đăng ký khoá" HorizontalAlignment="Center" Style="{StaticResource btn_None}">
+                        <Image Source="Images/Ic_AddKh.png" Width="25" Height="25"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Button>
+                    <Button x:Name="btn_XoaVideo" Background="{x:Null}" Click="btn_XoaVideo_Click"
+                                VerticalAlignment="Center" BorderThickness="0" Margin="10 0 0 0" Visibility="Hidden"
+                                ToolTip="Xoá video" HorizontalAlignment="Center" Style="{StaticResource btn_None}">
+                        <Image Source="Images/Ic_Delete.png" Width="25" Height="25"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Button>
+                    <Button x:Name="btn_XoaVideoKhoiKhoaHoc" Background="{x:Null}" Click="btn_XoaVideoKhoiKhoaHoc_Click"
+                                VerticalAlignment="Center" BorderThickness="0" Margin="10 0 0 0" Visibility="Hidden"
+                                ToolTip="Xoá Video khỏi khoá học" HorizontalAlignment="Center" Style="{StaticResource btn_None}">
+                        <Image Source="Images/Ic_Delete.png" Width="25" Height="25"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1" Margin="10">
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Bình luận" HorizontalAlignment="Center" VerticalAlignment="Top"
+                           Height="30" Foreground="#6FE69A" FontWeight="Bold" FontSize="18"/>
+                    <ListView x:Name="ListViewBinhLuan" ItemsSource="{Binding BinhLuan}"
+                              Background="#4E565A"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              ScrollViewer.VerticalScrollBarVisibility="Visible" Height="450">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel Margin="2" Width="220" Height="auto" Orientation="Vertical">
+                                    <TextBlock>
+                                        <Image Source="Images/Ic_Account.png" Width="25" Height="25"
+                                               HorizontalAlignment="Left"/>
+                                        <TextBlock Foreground="#70E7CC" FontSize="16" Width="200" TextWrapping="Wrap"
+                                                   FontWeight="Bold" Text="{Binding noiDung}"
+                                                   VerticalAlignment="Center"/>
+                                    </TextBlock>
+                                    <TextBlock Margin="5" Text="{Binding ngay}" Foreground="White"
+                                               FontSize="16" TextWrapping="Wrap"/>
+                                    <Border Width="250" Height="2" Background="White" Opacity="0.5"/>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <TextBlock Margin="5" Foreground="White" Height="25" Width="250">
+                            <Image Source="Images/Ic_Account.png" Width="25" Height="25"/>
+                            <TextBlock x:Name="txb_Tk" Foreground="#70E7CC" FontSize="18" Height="25"/>
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal" Margin="0 2 0 0">
+                        <TextBox x:Name="txb_NoiDungBl" Height="25" Width="220" Margin="5 2 5 0"
+                                 FontSize="18" ToolTip="Nhập nội dung">
+                        </TextBox>
+                        <Button x:Name="btn_BinhLuan" Background="Transparent"
+                                VerticalAlignment="Center" BorderThickness="0" Click="btn_BinhLuan_Click" Margin="0 0 0 0"
+                                ToolTip="Bình luận" HorizontalAlignment="Center" Style="{StaticResource btn_None}">
+                            <Image Source="Images/Ic_Send.png" Width="25" Height="25"
+                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

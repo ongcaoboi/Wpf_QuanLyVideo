@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Project_QuanLyVideoHocTap.UserControls.UC_KHCuaToi"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Project_QuanLyVideoHocTap.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="#4E565A" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" x:Name="spn_TimKiem" Orientation="Horizontal">
+            <TextBlock Text="Khoá học đang theo" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"
+                       FontSize="22" FontWeight="Bold" Margin="20 0 50 0"/>
+            <TextBlock Text="Tổng số: " HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"
+                       FontSize="22" FontWeight="Bold" Margin="20 0 0 0"/>
+            <TextBlock x:Name="txb_TongSo" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"
+                       FontSize="22" FontWeight="Bold" Margin="5 0 50 0"/>
+        </StackPanel>
+        <Button x:Name="btn_QuayLai" Margin="0 0 5 0" Background="#4E565A"
+                    ToolTip="Quay Lại" Click="btn_QuayLai_Click"
+                    Style="{StaticResource btn_None}" HorizontalAlignment="Right">
+            <Image Source="/Images/Ic_Back.png" Width="30" Height="30"/>
+        </Button>
+        <Grid Grid.Row="1" x:Name="Grid_List_KhoaHocCuaToi">
+
+        </Grid>
+    </Grid>
+</UserControl>

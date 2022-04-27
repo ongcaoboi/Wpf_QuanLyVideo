@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="Project_QuanLyVideoHocTap.UserControls.UC_QLThongKe"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Project_QuanLyVideoHocTap.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Background="#A16D6D">
+           
+            <Grid.RowDefinitions>
+                <RowDefinition Height="33"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Background="#5E8CB4" Grid.Row="0" FontSize="25" Foreground="White" VerticalAlignment="Stretch"
+                   HorizontalAlignment="Stretch" Text="Thống kê" FontWeight="Bold" TextAlignment="Center"/>
+            <StackPanel Background="#A4EEEE" Grid.Row="1" Orientation="Horizontal" Margin="1">
+                <TextBlock Grid.Row="0" Width="150" FontSize="18" Margin="5" Foreground="#2F376B" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" Text="Ngày bắt đầu: " TextAlignment="Left" TextWrapping="WrapWithOverflow" />
+                <TextBox x:Name="txb_NgayBatDau" FontSize="18" Width="150" Foreground="Black" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" TextAlignment="Left" TextWrapping="WrapWithOverflow"/>
+                <TextBlock Width="150" FontSize="18" Margin="5" Foreground="#2F376B" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" Text="Ngày Kết thúc: "  TextAlignment="Left" TextWrapping="WrapWithOverflow" />
+                <TextBox x:Name="txb_NgayKetThuc" FontSize="18" Foreground="Black" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" TextAlignment="Left" TextWrapping="WrapWithOverflow"/>
+            </StackPanel>
+            <StackPanel Background="#A4EEEE" Grid.Row="2" Orientation="Horizontal" Margin="1">
+                <TextBlock Width="150" FontSize="18" Margin="5" Foreground="#2F376B" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" Text="Tổng lượt xem: "  TextAlignment="Left" TextWrapping="WrapWithOverflow" />
+                <TextBox x:Name="txb_TongView" FontSize="18" Width="100" Foreground="Black" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" TextAlignment="Left" TextWrapping="WrapWithOverflow"/>
+                <TextBlock Width="180" FontSize="18" Margin="5" Foreground="#2F376B" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" Text="Tổng lượt bình luận: "  TextAlignment="Left" TextWrapping="WrapWithOverflow" />
+                <TextBox x:Name="txb_TongBL" FontSize="18" Foreground="Black" VerticalAlignment="Center"
+                   HorizontalAlignment="Center"  TextAlignment="Left" TextWrapping="WrapWithOverflow"/>
+            </StackPanel>
+            <StackPanel Background="#A4EEEE" Grid.Row="3" Orientation="Horizontal" Margin="1">
+                <TextBlock Width="150" FontSize="18" Margin="5" Foreground="#2F376B" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" Text="Video nhiều lượt xem nhất: "  TextAlignment="Left" TextWrapping="WrapWithOverflow" />
+                <TextBox x:Name="txb_VdXemNN" FontSize="18" Foreground="Black" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" TextAlignment="Left" TextWrapping="WrapWithOverflow"/>
+            </StackPanel>
+            <StackPanel Background="#A4EEEE" Grid.Row="4" Orientation="Horizontal" Margin="1">
+                <TextBlock Width="150" FontSize="18" Margin="5" Foreground="#2F376B" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" Text="Video nhiều bình luận nhất: "  TextAlignment="Left" TextWrapping="WrapWithOverflow" />
+                <TextBox x:Name="txb_VdBlNN" FontSize="18" Foreground="Black" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" TextAlignment="Left" TextWrapping="WrapWithOverflow"/>
+            </StackPanel>
+            <StackPanel Background="#A4EEEE" Grid.Row="5" Orientation="Horizontal" Margin="1">
+                <TextBlock Width="150" FontSize="18" Margin="5" Foreground="#2F376B" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" Text="Khoá học nhiều lượt xem nhất: "  TextAlignment="Left" TextWrapping="WrapWithOverflow" />
+                <TextBox x:Name="txb_KhViewNN" FontSize="18" Foreground="Black" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" TextAlignment="Left" TextWrapping="WrapWithOverflow"/>
+            </StackPanel>
+            <StackPanel Background="#A4EEEE" Grid.Row="6" Orientation="Horizontal" Margin="1">
+                <TextBlock Width="150" FontSize="18" Margin="5" Foreground="#2F376B" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" Text="Tài khoản xem nhiều nhất: "  TextAlignment="Left" TextWrapping="WrapWithOverflow" />
+                <TextBox x:Name="txb_TKXemNN" FontSize="18" Foreground="Black" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" TextAlignment="Left" TextWrapping="WrapWithOverflow"/>
+            </StackPanel>
+            <StackPanel Background="#A4EEEE" Grid.Row="7" Orientation="Horizontal" Margin="1">
+                <TextBlock Width="150" FontSize="18" Margin="5" Foreground="#2F376B" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" Text="Tài khoản bình luận nhiều nhất: "  TextAlignment="Left" TextWrapping="WrapWithOverflow" />
+                <TextBox x:Name="txb_TkBlNN" FontSize="18" Foreground="Black" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" TextAlignment="Left" TextWrapping="WrapWithOverflow"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1" Background="#73B4B4">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" FontSize="20" Foreground="#433337" Text="Chọn ngày bắt đầu" VerticalAlignment="Bottom"
+                   HorizontalAlignment="Center" TextWrapping="WrapWithOverflow"/>
+            <DatePicker Grid.Row="1" Height="25" Margin="10" VerticalAlignment="Top"
+                    SelectedDateChanged="DatePicker_SelectedDateChanged"/>
+            <TextBlock Grid.Row="2" FontSize="20" Foreground="#433337" Text="Chọn ngày kết thúc" VerticalAlignment="Bottom"
+                   HorizontalAlignment="Center" TextWrapping="WrapWithOverflow"/>
+            <DatePicker Grid.Row="3" Height="25" Margin="10" VerticalAlignment="Top"
+                    SelectedDateChanged="DatePicker_SelectedDateChanged_1"/>
+            <Button Grid.Row="4" x:Name="btn_XuatFile" Margin="20" Content="Xuất File" Style="{StaticResource btn_Bor}"
+                    VerticalAlignment="Bottom" Height="40" FontSize="20" FontWeight="Bold" Click="btn_XuatFile_Click"/>
+        </Grid>
+    </Grid>
+</UserControl>

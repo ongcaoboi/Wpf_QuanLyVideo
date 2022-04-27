@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLVDHT" Class="DataQLBHDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-3A6C1JK\SQLEXPRESS;Initial Catalog=QLVDHT;Integrated Security=True" SettingsObjectName="Project_QuanLyVideoHocTap.Properties.Settings" SettingsPropertyName="QLVDHTConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.BinhLuan" Member="BinhLuans">
+    <Type Name="BinhLuan">
+      <Column Name="idBl" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="noiDung" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="idVd" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idTk" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ngayBl" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="TaiKhoan_BinhLuan" Member="TaiKhoan" ThisKey="idTk" OtherKey="idTk" Type="TaiKhoan" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Video_BinhLuan" Member="Video" ThisKey="idVd" OtherKey="idVd" Type="Video" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DKKH" Member="DKKHs">
+    <Type Name="DKKH" Id="ID4">
+      <Column Name="idDk" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idKh" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idTk" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="KhoaHoc_DKKH" Member="KhoaHoc" ThisKey="idKh" OtherKey="idKh" Type="KhoaHoc" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="TaiKhoan_DKKH" Member="TaiKhoan" ThisKey="idTk" OtherKey="idTk" Type="TaiKhoan" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KhoaHoc" Member="KhoaHocs">
+    <Type Name="KhoaHoc" Id="ID1">
+      <Column Name="idKh" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tenKh" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ngayTao" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="KhoaHoc_DKKH" Member="DKKHs" ThisKey="idKh" OtherKey="idKh" Type="DKKH" />
+      <Association Name="KhoaHoc_Video" Member="Videos" ThisKey="idKh" OtherKey="idKh" Type="Video" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LichSuCoi" Member="LichSuCois">
+    <Type Name="LichSuCoi">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idVd" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idTk" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ngayCoi" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="TaiKhoan_LichSuCoi" Member="TaiKhoan" ThisKey="idTk" OtherKey="idTk" Type="TaiKhoan" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Video_LichSuCoi" Member="Video" ThisKey="idVd" OtherKey="idVd" Type="Video" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TaiKhoan" Member="TaiKhoans">
+    <Type Name="TaiKhoan" Id="ID3">
+      <Column Name="idTk" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tenDn" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="matKhau" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="TaiKhoan_BinhLuan" Member="BinhLuans" ThisKey="idTk" OtherKey="idTk" Type="BinhLuan" />
+      <Association Name="TaiKhoan_DKKH" Member="DKKHs" ThisKey="idTk" OtherKey="idTk" Type="DKKH" />
+      <Association Name="TaiKhoan_LichSuCoi" Member="LichSuCois" ThisKey="idTk" OtherKey="idTk" Type="LichSuCoi" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Videos" Member="Videos">
+    <Type Name="Video" Id="ID2">
+      <Column Name="idVd" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tenVd" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="urlThumbails" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="urlVd" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="luotXem" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idKh" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ngayDang" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Video_BinhLuan" Member="BinhLuans" ThisKey="idVd" OtherKey="idVd" Type="BinhLuan" />
+      <Association Name="Video_LichSuCoi" Member="LichSuCois" ThisKey="idVd" OtherKey="idVd" Type="LichSuCoi" />
+      <Association Name="KhoaHoc_Video" Member="KhoaHoc" ThisKey="idKh" OtherKey="idKh" Type="KhoaHoc" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_TimKh" Method="sp_TimKh">
+    <Parameter Name="tenKh" Type="System.String" DbType="NVarChar(100)" />
+    <ElementType IdRef="ID1" />
+  </Function>
+  <Function Name="dbo.sp_TimVd" Method="sp_TimVd">
+    <Parameter Name="tenVd" Type="System.String" DbType="NVarChar(100)" />
+    <ElementType IdRef="ID2" />
+  </Function>
+  <Function Name="dbo.sp_XemDsVd" Method="sp_XemDsVd">
+    <ElementType IdRef="ID2" />
+  </Function>
+  <Function Name="dbo.sp_XemDsKh" Method="sp_XemDsKh">
+    <ElementType IdRef="ID1" />
+  </Function>
+  <Function Name="dbo.sp_XemDsVdTheoKh" Method="sp_XemDsVdTheoKh">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID2" />
+  </Function>
+  <Function Name="dbo.func_DemVdTrongKh" Method="func_DemVdTrongKh" IsComposable="true">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.func_DangNhap" Method="func_DangNhap" IsComposable="true">
+    <Parameter Name="taiKhoan" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="matKhau" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_XemTTTK" Method="sp_XemTTTK">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID3" />
+  </Function>
+  <Function Name="dbo.func_KiemTraDKKH" Method="func_KiemTraDKKH" IsComposable="true">
+    <Parameter Name="idKh" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idTk" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Themkh" Method="sp_Themkh">
+    <Parameter Name="idKh" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idTk" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID4" />
+  </Function>
+  <Function Name="dbo.sp_XemDsKhCuaToi" Method="sp_XemDsKhCuaToi">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_XemDsKhCuaToiResult">
+      <Column Name="idKh" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="tenKh" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.pc_HuyDKKH" Method="pc_HuyDKKH">
+    <Parameter Name="idKh" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idTk" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.func_DemKhoaHocDk" Method="func_DemKhoaHocDk" IsComposable="true">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_XemVd" Method="sp_XemVd">
+    <Parameter Name="idVd" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idTk" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_XemVdResult">
+      <Column Name="" Member="Column1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.func_DemTongLuotXem" Method="func_DemTongLuotXem" IsComposable="true">
+    <Parameter Name="idTk" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_DoiMk" Method="sp_DoiMk">
+    <Parameter Name="idTk" Type="System.Int32" DbType="Int" />
+    <Parameter Name="tenDn" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="matKhau" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_DsIdVDaXem" Method="sp_DsIdVDaXem">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_DsIdVDaXemResult">
+      <Column Name="idVd" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.func_VideoSaCoi" Method="func_VideoSaCoi" IsComposable="true">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="func_VideoSaCoiResult">
+      <Column Name="idVd" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.func_LayTenKhCuaVd" Method="func_LayTenKhCuaVd" IsComposable="true">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.sp_LayBinhLuan" Method="sp_LayBinhLuan">
+    <Parameter Name="idVd" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_LayBinhLuanResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="noiDung" Type="System.String" DbType="NVarChar(232)" CanBeNull="true" />
+      <Column Name="ngay" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_BinhLuanVoVd" Method="sp_BinhLuanVoVd">
+    <Parameter Name="noiDung" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="idVd" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idTk" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_XoaKhoaHoc" Method="sp_XoaKhoaHoc">
+    <Parameter Name="idKh" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_XoaVideo" Method="sp_XoaVideo">
+    <Parameter Name="idVd" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_KiemTraDaCoiVdChua" Method="sp_KiemTraDaCoiVdChua">
+    <Parameter Name="idVd" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idTk" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_KiemTraDaCoiVdChuaResult">
+      <Column Name="sl" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.func_KiemTraDaCoiVdChua" Method="func_KiemTraDaCoiVdChua" IsComposable="true">
+    <Parameter Name="idVd" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idTk" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_XoaVideoKhoiKh" Method="sp_XoaVideoKhoiKh">
+    <Parameter Name="idVd" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_TaoKhoaHoc" Method="sp_TaoKhoaHoc">
+    <Parameter Name="Ten" Parameter="ten" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_TaoVd" Method="sp_TaoVd">
+    <Parameter Name="tenVd" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="urlThumbails" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="urlVd" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="idKh" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.func_KtraKhTonTaiChua" Method="func_KtraKhTonTaiChua" IsComposable="true">
+    <Parameter Name="tenKh" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.func_KtrVdTonTaiChua" Method="func_KtrVdTonTaiChua" IsComposable="true">
+    <Parameter Name="tenVd" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="urlThumbails" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="urlVd" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="idKh" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_SuaVd" Method="sp_SuaVd">
+    <Parameter Name="idVd" Type="System.Int32" DbType="Int" />
+    <Parameter Name="tenVd" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="urlThumbails" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="urlVd" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="idKh" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_SuaKh" Method="sp_SuaKh">
+    <Parameter Name="idKh" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ten" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.func_KtraKhTonTaiId" Method="func_KtraKhTonTaiId" IsComposable="true">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_TaoVdNoIdKh" Method="sp_TaoVdNoIdKh">
+    <Parameter Name="tenVd" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="urlThumbails" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="urlVd" Type="System.String" DbType="VarChar(200)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fuc_ThongKe" Method="fuc_ThongKe" IsComposable="true">
+    <Parameter Name="ngayBd" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="ngayKt" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="fuc_ThongKeResult">
+      <Column Name="tongView" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="tongBl" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="tenVdXemNn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="tenVdBlNn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="tenKhXemNn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="tenTkXemNn" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="tenTkBlNn" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.func_CheckUser" Method="func_CheckUser" IsComposable="true">
+    <Parameter Name="ten" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_TaoUser" Method="sp_TaoUser">
+    <Parameter Name="tenDn" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="matKhau" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

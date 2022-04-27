@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="Project_QuanLyVideoHocTap.UserControls.UC_PageVideos_InKh"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Project_QuanLyVideoHocTap.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="#4E565A">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="2" Orientation="Horizontal">
+            <TextBlock Text="Số lượng video trong khoá học: " FontSize="22" Foreground="White" 
+                       Margin="10 0 0 0" x:Name="txb_SoLuongVd"/>
+            <TextBlock x:Name="txb_SoVd" Text="" FontSize="22" Margin=" 10 0 0 0" 
+                       Foreground="White"/>
+            <Grid Height="40" Margin="40 0 0 0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <Button x:Name="btn_DangKyKhoaHoc" Background="{x:Null}" BorderThickness="0"
+                        VerticalAlignment="Center" Click="btn_DangKyKhoaHoc_Click" Style="{StaticResource btn_None}"
+                        ToolTip="Đăng ký khoá học" HorizontalAlignment="Right">
+                    <Image Source="/Images/Ic_AddKh.png" Width="30" Height="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+                </Button>
+                <Button x:Name="btn_HuyDangKy" Background="{x:Null}" BorderThickness="0"
+                        VerticalAlignment="Center" Click="btn_HuyDangKy_Click"
+                        ToolTip="Huỷ đăng ký khoá học" HorizontalAlignment="Right" Style="{StaticResource btn_None}">
+                    <Image Source="/Images/Ic_Delete.png" Width="30" Height="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+                </Button>
+            </Grid>
+            <Button x:Name="btn_XoaKhoaHoc" Background="{x:Null}" BorderThickness="0"
+                    VerticalAlignment="Center" Click="btn_XoaKhoaHoc_Click" Visibility="Collapsed"
+                    ToolTip="Xoá Khoá học (sẽ xoá toàn bộ video trong khoá học)" HorizontalAlignment="Right" Style="{StaticResource btn_None}">
+                <Image Source="/Images/Ic_Delete.png" Width="30" Height="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+            </Button>
+        </StackPanel>
+        <Grid x:Name="Grid_List" Grid.Row="1">
+            <ListView x:Name="List_VdInKh" ItemsSource="{Binding Video}"
+              Background="#4E565A" SelectionChanged="List_VdInKh_SelectionChanged"
+              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+              ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="10" Height="200">
+                            <Border Width="320" Height="180" CornerRadius="2" Margin="2">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="1"/>
+                                </Border.Effect>
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding urlThumbails}"/>
+                                </Border.Background>
+                            </Border>
+                            <StackPanel Margin="5" Orientation="Vertical">
+                                <TextBlock Margin="5" Text="{Binding tenVd}" Foreground="White"
+                               FontSize="22" TextWrapping="Wrap" FontWeight="Bold"                                                 
+                               FontFamily="Franklin Gothic Medium"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Margin="5" Text="Lượt xem: " FontSize="17" Foreground="White"/>
+                                    <TextBlock Margin="5 0" Text="{Binding luotXem}"
+                               TextWrapping="Wrap" FontSize="17" Foreground="White"/>
+                                </StackPanel>
+                                <StackPanel Margin="5" Orientation="Horizontal">
+                                    <TextBlock Text="Ngày đăng: " FontSize="17" Foreground="White"/>
+                                    <TextBlock Margin="5 0" Text="{Binding ngayDang}"
+                               TextWrapping="Wrap" FontSize="17" Foreground="White"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</UserControl>
